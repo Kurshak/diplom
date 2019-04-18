@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :users
+      resources :categories
+      resources :claims
+
+      root to: "users#index"
+    end
   namespace 'api' do
     namespace 'v1' do
       mount_devise_token_auth_for 'User', at: 'auth'

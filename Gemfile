@@ -49,3 +49,6 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
 gem "active_model_serializers", "~> 0.10.0"
+gem 'administrate'
+gem 'administrate-field-active_storage'
+gem "mini_magick"
