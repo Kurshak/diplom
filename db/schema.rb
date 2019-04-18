@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_12_225706) do
+ActiveRecord::Schema.define(version: 2019_04_18_115442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,21 @@ ActiveRecord::Schema.define(version: 2019_04_12_225706) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "sub_category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "claim_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "claim_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "claims", force: :cascade do |t|
     t.string "title", limit: 50, default: "", null: false
     t.text "description", default: "", null: false
@@ -44,6 +59,13 @@ ActiveRecord::Schema.define(version: 2019_04_12_225706) do
     t.float "lon"
     t.integer "owner_id"
     t.integer "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sub_categories", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-class Category < ApplicationRecord
+class SubCategory < ApplicationRecord
   has_one_attached :image
-  has_many :sub_categories
+  has_many :claims
+  belongs_to :category, class_name: 'category', foreign_key: 'category_id'
   MAX_SIZE = 30_000_000
 
   validates :title, :description, presence: true
