@@ -2,7 +2,7 @@
 
 class Claim < ApplicationRecord
   # Associations
-  belongs_to :sub_category, class_name: 'sub_category', foreign_key: 'sub_category_id'
+  belongs_to :sub_category, class_name: 'SubCategory', foreign_key: 'sub_category_id'
   belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
   has_one_attached :image
 

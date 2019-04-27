@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class ClaimDashboard < Administrate::BaseDashboard
+class SubCategoryDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -8,20 +8,14 @@ class ClaimDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    sub_category: Field::BelongsTo.with_options(class_name: "SubCategory"),
-    owner: Field::BelongsTo.with_options(class_name: "User"),
     image: Field::ActiveStorage,
+    category: Field::BelongsTo.with_options(class_name: "Category"),
     id: Field::Number,
     title: Field::String,
-    description: Field::Text,
-    done: Field::Boolean,
-    lat: Field::Number.with_options(decimals: 2),
-    lon: Field::Number.with_options(decimals: 2),
-    owner_id: Field::Number,
+    description: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    adress: Field::String,
-    sub_category_id: Field::Number,
+    category_id: Field::Number,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -33,49 +27,39 @@ class ClaimDashboard < Administrate::BaseDashboard
     :id,
     :title,
     :description,
-    :adress,
-    :sub_category,
-    :owner,
-    :image,
+    :category,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :sub_category,
-    :owner,
     :image,
+    :category,
     :id,
     :title,
     :description,
-    :done,
-    :lat,
-    :lon,
-    :owner_id,
     :created_at,
     :updated_at,
-    :adress,
+    :category_id,
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :sub_category,
-    :owner,
     :image,
+    :category,
     :title,
     :description,
-    :done,
-    :lat,
-    :lon,
-    :adress,
   ].freeze
 
-  # Overwrite this method to customize how claims are displayed
+  # Overwrite this method to customize how sub categories are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(claim)
-  #   "Claim ##{claim.id}"
+  # def display_resource(sub_category)
+  #   "SubCategory ##{sub_category.id}"
   # end
+  def display_resource(sub_category)
+    "#{sub_category.title}"
+  end
 end

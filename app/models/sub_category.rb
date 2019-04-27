@@ -3,7 +3,7 @@
 class SubCategory < ApplicationRecord
   has_one_attached :image
   has_many :claims
-  belongs_to :category, class_name: 'category', foreign_key: 'category_id'
+  belongs_to :category, class_name: 'Category', foreign_key: 'category_id'
   MAX_SIZE = 30_000_000
 
   validates :title, :description, presence: true

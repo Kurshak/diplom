@@ -35,8 +35,9 @@ class UserDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :provider,
-    :uid,
-    :encrypted_password,
+    :name,
+    :email,
+    :created_at,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -87,4 +88,7 @@ class UserDashboard < Administrate::BaseDashboard
   # def display_resource(user)
   #   "User ##{user.id}"
   # end
+  def display_resource(sub_category)
+    "#{sub_category.email}"
+  end
 end

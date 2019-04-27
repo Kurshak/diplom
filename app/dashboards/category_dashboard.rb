@@ -8,6 +8,7 @@ class CategoryDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
+    image: Field::ActiveStorage,
     id: Field::Number,
     title: Field::String,
     description: Field::String,
@@ -25,12 +26,12 @@ class CategoryDashboard < Administrate::BaseDashboard
     :id,
     :title,
     :description,
-    :sub_category_id,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
+    :image,
     :id,
     :title,
     :description,
@@ -43,6 +44,7 @@ class CategoryDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
+    :image,
     :title,
     :description,
     :sub_category_id,
@@ -54,4 +56,7 @@ class CategoryDashboard < Administrate::BaseDashboard
   # def display_resource(category)
   #   "Category ##{category.id}"
   # end
+  def display_resource(category)
+    "#{category.title}"
+  end
 end
