@@ -1,26 +1,16 @@
 # frozen_string_literal: true
 
-class Claim < ApplicationRecord
+class Comment < ApplicationRecord
   # Associations
-  belongs_to :sub_category, class_name: 'SubCategory', foreign_key: 'sub_category_id'
-  belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
+  belongs_to :user, class_name: 'User', foreign_key: 'user_id'
   has_one_attached :image
-  has_many :comments, class_name: 'Comment'
-
+  belongs_to :claim, class_name: 'Claim', foreign_key: 'claim_id'
   # Validation
-  validates :title,         length: { maximum: 50 }, presence: true
-  validates :description,   presence: true
-  validates :adress,        presence: true
+  #validates :comment_text, presence: true
   validate :correct_image_mime_type
   validate :check_image_size
 
-  before_save :image_attached
-
   MAX_SIZE = 30_000_000
-
-  def image_attached
-    resize_image if image.attached?
-  end
 
   def check_image_size
     errors.add :to_big_image, I18n.t('to_big_image') if image.attached? && image.blob.byte_size > MAX_SIZE

@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class ClaimDashboard < Administrate::BaseDashboard
+class CommentDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -8,20 +8,14 @@ class ClaimDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    sub_category: Field::BelongsTo.with_options(class_name: "SubCategory"),
-    owner: Field::BelongsTo.with_options(class_name: "User"),
-    image: Field::ActiveStorage,
+    user: Field::BelongsTo,
+    image_attachment: Field::HasOne,
+    image_blob: Field::HasOne,
+    claim: Field::BelongsTo,
     id: Field::Number,
-    title: Field::String,
-    description: Field::Text,
-    done: Field::Boolean,
-    lat: Field::Number.with_options(decimals: 2),
-    lon: Field::Number.with_options(decimals: 2),
-    owner_id: Field::Number,
+    comment_text: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    adress: Field::String,
-    sub_category_id: Field::Number,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -30,55 +24,40 @@ class ClaimDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :id,
-    :title,
-    :description,
-    :adress,
-    :sub_category,
-    :owner,
-    :image,
+    :user,
+    :image_attachment,
+    :image_blob,
+    :claim,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :sub_category,
-    :owner,
-    :image,
+    :user,
+    :image_attachment,
+    :image_blob,
+    :claim,
     :id,
-    :title,
-    :description,
-    :done,
-    :lat,
-    :lon,
-    :owner_id,
+    :comment_text,
     :created_at,
     :updated_at,
-    :adress,
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :sub_category,
-    :owner,
-    :image,
-    :title,
-    :description,
-    :done,
-    :lat,
-    :lon,
-    :adress,
+    :user,
+    :image_attachment,
+    :image_blob,
+    :claim,
+    :comment_text,
   ].freeze
 
-  # Overwrite this method to customize how claims are displayed
+  # Overwrite this method to customize how comments are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(claim)
-  #   "Claim ##{claim.id}"
+  # def display_resource(comment)
+  #   "Comment ##{comment.id}"
   # end
-  def display_resource(claim)
-    "#{claim.title}"
-  end
 end

@@ -47,7 +47,6 @@ class CategoryDashboard < Administrate::BaseDashboard
     :image,
     :title,
     :description,
-    :sub_category_id,
   ].freeze
 
   # Overwrite this method to customize how categories are displayed
