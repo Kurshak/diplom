@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
   namespace 'api' do
     namespace 'v1' do
+      post :search, to: 'claims#search'
       resources :categories, only: %i[index show] do
         resources :sub_categories, only: %i[index show] do
           resources :claims do

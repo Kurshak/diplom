@@ -12,6 +12,7 @@ class Claim < ApplicationRecord
   validates :description,   presence: true
   # Scopes
   scope :active, -> { where(done: true) }
+  scope :sql_search, ->(query) { where("title ILIKE ?", "#{query}%") }
   # validates :adress,        presence: true
   # validate :correct_image_mime_type
   # validate :check_image_size

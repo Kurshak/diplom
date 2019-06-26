@@ -37,10 +37,15 @@ class Api::V1::ClaimsController < ApplicationController
     claim.delete
   end
 
+  def search
+    result = Claim.sql_search(params[:search_params])
+    render json: result, status: :ok
+  end
+
   private
 
   def claim_params
-    params.permit(:title, :description, :date, :adress, :lat, :lon, :owner_id)
+    params.permit(:title, :description, :date, :adress, :lat, :lon, :owner_id, :search_params)
   end
 
   def claim
