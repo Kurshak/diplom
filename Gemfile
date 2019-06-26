@@ -52,3 +52,4 @@ gem 'administrate-field-active_storage'
 gem "mini_magick"
 gem 'devise'
 gem 'devise_token_auth'
+gem 'figaro'
