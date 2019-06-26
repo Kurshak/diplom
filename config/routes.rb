@@ -9,10 +9,9 @@ Rails.application.routes.draw do
     resources :comments, only: %i[index show destroy]
     root 'users#index'
   end
-
+  mount_devise_token_auth_for 'User', at: 'auth'
   namespace 'api' do
     namespace 'v1' do
-      mount_devise_token_auth_for 'User', at: 'auth'
       resources :categories, only: %i[index show] do
         resources :sub_categories, only: %i[index show] do
           resources :claims do

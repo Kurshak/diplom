@@ -3,13 +3,13 @@
 class Api::V1::ClaimsController < ApplicationController
   def index
     render(
-      json: sub_category.claims,
+      json: sub_category.claims.active,
       each_serializer: Api::V1::Claims::IndexSerializer
     )
   end
 
   def create
-    new_claim = Claim.new(claim_params.merge(owner_id: current_user))
+    new_claim = sub_category.claims.new(claim_params)
     if new_claim.save
       render json: new_claim, status: :ok
     else
@@ -40,7 +40,7 @@ class Api::V1::ClaimsController < ApplicationController
   private
 
   def claim_params
-    params.permit(:title, :description, :date, :adress, :lat, :lon)
+    params.permit(:title, :description, :date, :adress, :lat, :lon, :owner_id)
   end
 
   def claim

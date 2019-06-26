@@ -9,7 +9,7 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def create
-    new_comment = Comment.new(comment_params.merge(user_id: current_user))
+    new_comment = Comment.new(comment_params)
     if new_comment.save
       render json: new_comment, status: :ok
     else
