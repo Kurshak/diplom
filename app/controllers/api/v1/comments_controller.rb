@@ -9,7 +9,8 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def create
-    new_comment = Comment.new(comment_params)
+    # debugger
+    new_comment = comments.new(comment_params)
     if new_comment.save
       render json: new_comment, status: :ok
     else
@@ -35,12 +36,13 @@ class Api::V1::CommentsController < ApplicationController
 
   def destroy
     comment.delete
+    render json: destroy, status: :ok
   end
 
   private
 
   def comment_params
-    params.permit(:comment_text, :claim_id, :user_id)
+    params.permit(:comment_text, :user_id)
   end
 
   def comment
